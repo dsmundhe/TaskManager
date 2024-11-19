@@ -60,4 +60,4 @@ Make sure you have the following installed:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/taskmanager.git
+   git clone https://github.com/dsmundhe/taskmanager.git
