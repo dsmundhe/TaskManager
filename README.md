@@ -21,10 +21,10 @@ TaskManager is a web application built using the MERN stack to visualize team ro
 ## Team Members
 
 - **Aashvi**
+- **Maithili**
 - **Yogesh**
 - **Amogh**
 - **Sahil**
-- **Maithili**
 - **Dipak**
 
 ---
