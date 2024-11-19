@@ -26,13 +26,13 @@ const SignUp = () => {
                         {/* Social Icons Section */}
                         <div className="flex justify-center space-x-4">
                             {/* Replace `Icons` with actual icons or social login buttons */}
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300">
                                 <FaGoogle />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300">
                                 <FaLinkedin />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300">
                                 <FaGithub />
                             </span>
                         </div>
