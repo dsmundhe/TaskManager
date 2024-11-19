@@ -5,7 +5,7 @@ import { FaGoogle } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import PasswordIn from '../../components/PasswordIn/PasswordIn';
-
+import './Login.css'
 
 const Login = () => {
 
@@ -45,7 +45,7 @@ const Login = () => {
 
             {/* Login Form Container */}
             <div className="flex items-center justify-center mt-28">
-                <div className="w-96 border rounded px-7 py-10 bg-white shadow-lg">
+                <div className="w-96 border rounded px-7 py-10 bg-white shadow-lg  ">
 
                     {/* Login Form */}
                     <form className="text-center space-y-6"
