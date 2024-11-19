@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 
 const  App = () => {
@@ -9,3 +10,4 @@ const  App = () => {
 }
 
 export default App
+
