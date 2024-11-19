@@ -4,24 +4,3 @@
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-body {
-  background: url("https://i.pinimg.com/originals/1b/25/78/1b2578da6d717bf3989714ae682abf7f.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-img {
-  height: 500px;
-}
-
-.parent {
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.parent .child {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
