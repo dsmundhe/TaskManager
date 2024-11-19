@@ -44,7 +44,7 @@ const Login = () => {
             <Navbar />
 
             {/* Login Form Container */}
-            <div className="flex items-center justify-center mt-28">
+            <div className="flex items-center justify-center mt-28 bg-dark-100">
                 <div className="w-96 border rounded px-7 py-10 bg-white shadow-lg  ">
 
                     {/* Login Form */}
