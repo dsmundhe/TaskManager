@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
+import ProfileInfo from '../Cards/ProfileInfo'; 
+import {Link, useNavigate} from 'react-router-dom'
 const Navbar = () => {
+
+  const navigate =useNavigate ;
+  const onLogout = () => {
+    navigate("/login");
+  };
+
+
   const [searchQuery, setSearchQuery] = useState('');
 
   // Handle search query change
@@ -13,14 +21,15 @@ const Navbar = () => {
     e.preventDefault();
     console.log('Search Query:', searchQuery);  // You can replace this with the actual search logic
   };
-
+//  profileInfo Section
   return (
     <div className="bg-white flex items-center justify-between px-6 py-1 shadow-md">
       <div className="flex items-center">
         <h1 className="ml-4 text-xl font-semibold text-black">Notes</h1>
+    <ProfileInfo onLogout={onLogout} /> 
       </div>
 
-      <div className="flex items-center space-x-8">
+  <div className="flex items-center space-x-8">
         {/* Search Bar Section */}
         <form onSubmit={handleSearchSubmit} className="flex items-center">
           <input
