@@ -6,6 +6,9 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import PasswordIn from '../../components/PasswordIn/PasswordIn';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -15,23 +18,63 @@ const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!name && !email && !password) {
-            setError('Fill all the states!');
+            toast.error('Fill all the fields', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                className: 'custom-toast',
+            });
             return;
         }
-        if (!name || name.trim === '') {
-            setError('Enter name');
+        if (!name) {
+            toast.error('Enter name', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                className: 'custom-toast',
+            });
             return;
         }
-        if (!email || email.trim() === "") {
-            setError("Please Enter Email!");
+        if (!email) {
+            toast.error('Enter email', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                className: 'custom-toast',
+            });
             return;
         }
 
         if (!password || password.trim() === "") {
-            setError("Enter Password!");
+            toast.error('Enter password', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                className: 'custom-toast',
+            });
             return;
         }
-
+        toast.success('Signup successful', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            className: 'custom-toast',
+        });
     }
     return (
         <>
@@ -75,6 +118,8 @@ const SignUp = () => {
                                     type="text"
                                     placeholder="Enter your name"
                                     className="w-full border rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
 
@@ -84,6 +129,8 @@ const SignUp = () => {
                                     type="email"
                                     placeholder="Enter your email"
                                     className="w-full border rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
 
@@ -96,9 +143,8 @@ const SignUp = () => {
                             </div>
                         </div>
 
-                        <p className='text-xs text-red-600'>
-                            {error}
-                        </p>
+                        <ToastContainer />
+
 
                         {/* Signup Button */}
                         <div>

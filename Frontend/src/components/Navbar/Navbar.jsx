@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import {Link} from 'react-router-dom'
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -40,11 +40,11 @@ const Navbar = () => {
 
         {/* Profile Section */}
         <h2 className="cursor-pointer text-gray-700 hover:text-blue-500 transition duration-300">
-          <img
+          <Link to='/profile'> <img
             className="h-16 rounded-full"
             src="https://i.pinimg.com/originals/ba/3d/73/ba3d738757089a28da691cf46235428b.gif"
             alt="Logo"
-          />
+          /></Link>
         </h2>
       </div>
     </div>

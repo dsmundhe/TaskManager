@@ -6,6 +6,10 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import PasswordIn from '../../components/PasswordIn/PasswordIn';
 import './Login.css'
+import { useNavigate } from 'react-router-dom';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
@@ -13,27 +17,64 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (!email && !password) {
-            setError('Fill all the states!');
+            // setError('Fill all the states!');
+            toast.error('Fill all the fields', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                className: 'custom-toast',
+            });
             return;
         }
 
         if (!email || email.trim() === "") {
-            setError("Please Enter Email!");
+            toast.error('Enter Email', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                className: 'custom-toast',
+            });
             return;
         }
 
         if (!password || password.trim() === "") {
-            setError("Enter Password!");
+            toast.error('Enter password', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                className: 'custom-toast',
+            });
             return;
         }
 
 
-        setError(null);
+        toast.success('Login successful', {
+            position: 'top-right', // Position at the bottom center
+            autoClose: 5000,           // Close after 5 seconds
+            hideProgressBar: true,     // Hide the progress bar
+            closeOnClick: true,        // Close on click
+            pauseOnHover: true,        // Pause on hover
+            draggable: true,           // Allow drag
+            className: 'custom-toast', // Apply custom class for size
+        });
 
+        // for to reach home page after login
+        // navigate('/')
     };
 
 
@@ -93,7 +134,7 @@ const Login = () => {
                                 />
                             </div>
                         </div>
-
+                        <ToastContainer />
                         <p className='text-xs text-red-600'>
                             {error}
                         </p>
