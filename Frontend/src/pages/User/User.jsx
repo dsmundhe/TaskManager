@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar'; 
 import { Link, useNavigate } from 'react-router-dom'; 
 
 const User = () => {
-    
+    const [logoutMessage, setLogoutMessage] = useState(''); // State to store the logout message
     const user = {
         name: 'John',
         email: 'john@example.com',
@@ -12,23 +12,26 @@ const User = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-     
         localStorage.removeItem('authToken');
         sessionStorage.removeItem('authToken');
 
-        navigate('/login');
+        setLogoutMessage('Log out successfully'); // Set the logout message
+
+        // Redirect after a brief delay to allow the message to display
+        setTimeout(() => {
+            setLogoutMessage(''); // Clear the message
+            navigate('/login');
+        }, 2000); // 2-second delay
     };
 
     return (
         <>
-           
-         <Navbar />
+            <Navbar />
             <div className="flex items-center justify-center mt-20">
                 <div className="w-96 border rounded-lg px-8 py-10 bg-white shadow-lg">
-
-              
                     <div className="text-center space-y-6">
 
+                        {/* User Profile Section */}
                         <div>
                             <img
                                 src={user.profilePicture}
@@ -40,6 +43,8 @@ const User = () => {
                             <h1 className="text-2xl font-semibold">{user.name}</h1>
                             <p className="text-gray-600">{user.email}</p>
                         </div>
+
+                        {/* Update Profile Button */}
                         <div>
                             <Link to="/update-profile">
                                 <button className="button-primary">
@@ -48,6 +53,7 @@ const User = () => {
                             </Link>
                         </div>
 
+                        {/* Logout Button */}
                         <div>
                             <button
                                 className="button-secondary"
@@ -56,6 +62,8 @@ const User = () => {
                                 Logout
                             </button>
                         </div>
+
+                        {/* Go to Home Button */}
                         <div>
                             <Link to="/">
                                 <button className="button-secondary">
@@ -63,6 +71,13 @@ const User = () => {
                                 </button>
                             </Link>
                         </div>
+
+                        {/* Logout Message */}
+                        {logoutMessage && (
+                            <div className="mt-4 text-grey-500 font-semibold">
+                                {logoutMessage}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
