@@ -5,6 +5,8 @@ import './Home.css'
 import { FaPlus } from "react-icons/fa";
 import AddeditNotes from '../../components/Inputes/AddeditNotes';
 import Modal from 'react-modal'
+
+
 const Home = () => {
 
   const [openaddisShown, setopenaddIsShown] = useState({
@@ -88,3 +90,4 @@ const Home = () => {
 };
 
 export default Home;
+
