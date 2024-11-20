@@ -5,7 +5,8 @@ const ProfileInfo =({ onLogout }) => {
     return (
       <div className=" flex items-centre gap-3">
         <div className="w-12 h-12 flex items-center jusify-centre rounded-full text-slate-950 font-medium bg-slate-100">
-           {getInitials("John Willam")}
+         
+         <h2>  {getInitials("John Willam")}</h2>
         </div>
 
         <div><p className=" text-sm font-medium"> John Willam</p>

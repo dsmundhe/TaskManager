@@ -13,3 +13,4 @@ export const getInitials = (name) => {
     }
     return initials.toUpperCase();
 }
+
