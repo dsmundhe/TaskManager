@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { Link } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import PasswordIn from '../../components/PasswordIn/PasswordIn';
 
 const SignUp = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!name && !email && !password) {
+            setError('Fill all the states!');
+            return;
+        }
+        if (!name || name.trim === '') {
+            setError('Enter name');
+            return;
+        }
+        if (!email || email.trim() === "") {
+            setError("Please Enter Email!");
+            return;
+        }
+
+        if (!password || password.trim() === "") {
+            setError("Enter Password!");
+            return;
+        }
+
+    }
     return (
         <>
             {/* Navbar Component */}
@@ -16,7 +43,9 @@ const SignUp = () => {
                 <div className="w-96 border rounded px-7 py-10 bg-white shadow-lg">
 
                     {/* Signup Form */}
-                    <form className="text-center space-y-6">
+                    <form className="text-center space-y-6"
+                        onSubmit={handleSubmit}
+                    >
 
                         {/* Header Section */}
                         <div>
@@ -26,13 +55,13 @@ const SignUp = () => {
                         {/* Social Icons Section */}
                         <div className="flex justify-center space-x-4">
                             {/* Replace Icons with actual icons or social login buttons */}
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
                                 <FaGoogle />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
                                 <FaLinkedin />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
                                 <FaGithub />
                             </span>
                         </div>
@@ -54,21 +83,22 @@ const SignUp = () => {
                                 <input
                                     type="email"
                                     placeholder="Enter your email"
-                                    required
                                     className="w-full border rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                                 />
                             </div>
 
                             {/* Password Input */}
                             <div className="relative">
-                                <input
-                                    type="password"
-                                    placeholder="Enter your password"
-                                    required
-                                    className="w-full border rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                <PasswordIn
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                         </div>
+
+                        <p className='text-xs text-red-600'>
+                            {error}
+                        </p>
 
                         {/* Signup Button */}
                         <div>

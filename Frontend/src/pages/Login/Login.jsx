@@ -59,15 +59,15 @@ const Login = () => {
 
                         {/* Social Icons Section */}
                         <div className="flex justify-center space-x-4">
-                            {/* Replace `Icons` with actual icons or social login buttons */}
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300">
-                                <FaGoogle className='hover:text-blue-700 cursor-pointer' />
+                            {/* Replace Icons with actual icons or social login buttons */}
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
+                                <FaGoogle />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300">
-                                <FaLinkedin className='hover:text-blue-700 cursor-pointer' />
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
+                                <FaLinkedin />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-300">
-                                <FaGithub className='hover:text-blue-700 cursor-pointer' />
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
+                                <FaGithub />
                             </span>
                         </div>
 

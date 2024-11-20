@@ -28,7 +28,7 @@ const Navbar = () => {
             value={searchQuery}
             onChange={handleSearchChange}
             placeholder="Search..."
-            className="px-2 py-1 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-xs"
+            className="px-6 py-2 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-xs font-medium"
           />
           <button
             type="submit"
