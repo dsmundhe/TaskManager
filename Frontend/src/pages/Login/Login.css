@@ -3,20 +3,23 @@
   padding: 10px 20px;
   border-radius: 8px;
   margin-top: 80px;
+  max-width: 400px; /* Set a reasonable max width for large screens */
 }
 
 @media (max-width: 768px) {
   .custom-toast {
-    font-size: 12px;
+    font-size: 13px; /* Slightly larger font for better readability on tablets */
     padding: 8px 16px;
-    max-width: 90%;
+    max-width: 90%; /* Occupy most of the screen width */
+    margin: 150px auto; /* Center the toast */
   }
 }
 
 @media (max-width: 480px) {
   .custom-toast {
-    font-size: 11px;
-    padding: 6px 14px;
-    max-width: 85%;
+    font-size: 12px;
+    padding: 6px 12px;
+    max-width: 95%; /* Almost full width for smaller devices */
+    margin: 100px auto; /* Keep it centered */
   }
 }

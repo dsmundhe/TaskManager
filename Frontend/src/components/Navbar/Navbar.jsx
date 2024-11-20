@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Handle search query change
   const handleSearchChange = (e) => {
@@ -11,24 +12,36 @@ const Navbar = () => {
   // Handle search form submission
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log('Search Query:', searchQuery);  // You can replace this with the actual search logic
+    console.log("Search Query:", searchQuery); // You can replace this with the actual search logic
   };
 
   return (
-    <div className="bg-white flex items-center justify-between px-6 py-1 shadow-md">
-      <div className="flex items-center">
-        <h1 className="ml-4 text-xl font-semibold text-black">Notes</h1>
+    <div className="bg-white flex flex-wrap items-center justify-between px-4 py-2 shadow-md">
+      {/* Logo Section */}
+      <div className="flex items-center w-full sm:w-auto justify-between sm:justify-start">
+        <h1 className="ml-2 text-xl font-semibold text-black">Notes</h1>
+        {/* Hamburger Icon for Mobile */}
+        <div className="block sm:hidden">
+          <button className="focus:outline-none">
+            {/* Icon can be replaced with a real hamburger menu icon */}
+            <span className="text-2xl text-gray-700">☰</span>
+          </button>
+        </div>
       </div>
 
-      <div className="flex items-center space-x-8">
+      {/* Search and Profile Section */}
+      <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 w-full sm:w-auto mt-2 sm:mt-0">
         {/* Search Bar Section */}
-        <form onSubmit={handleSearchSubmit} className="flex items-center">
+        <form
+          onSubmit={handleSearchSubmit}
+          className="flex items-center justify-center w-full sm:w-auto"
+        >
           <input
             type="text"
             value={searchQuery}
             onChange={handleSearchChange}
             placeholder="Search..."
-            className="px-6 py-2 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-xs font-medium"
+            className="px-6 py-2 w-full sm:w-auto rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-xs font-medium"
           />
           <button
             type="submit"
@@ -40,11 +53,13 @@ const Navbar = () => {
 
         {/* Profile Section */}
         <h2 className="cursor-pointer text-gray-700 hover:text-blue-500 transition duration-300">
-          <Link to='/profile'> <img
-            className="h-16 rounded-full"
-            src="https://i.pinimg.com/originals/ba/3d/73/ba3d738757089a28da691cf46235428b.gif"
-            alt="Logo"
-          /></Link>
+          <Link to="/profile">
+            <img
+              className="h-10 w-10 sm:h-16 sm:w-16 rounded-full"
+              src="https://i.pinimg.com/originals/ba/3d/73/ba3d738757089a28da691cf46235428b.gif"
+              alt="Logo"
+            />
+          </Link>
         </h2>
       </div>
     </div>

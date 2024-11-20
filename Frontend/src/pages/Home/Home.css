@@ -1,0 +1,17 @@
+.editButton{
+    position:fixed;
+    bottom: 30px;
+    right: 45px;
+    cursor: pointer;
+}
+
+.editButton button{
+    cursor: pointer;
+    padding: 22px 23px;
+    background-color: royalblue;
+    border-radius: 10px ;
+    font-size: 18px;
+    color: white;
+    font-weight: 400;
+    box-shadow: 1px 1px 10px black;
+}
