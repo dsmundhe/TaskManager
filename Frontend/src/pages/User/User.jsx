@@ -77,10 +77,10 @@ const User = () => {
                     {/* Notification Bell and Settings Icon */}
                     <div className="flex justify-center mt-6 space-x-4">
                         <Link to="/notifications">
-                        <button className="text-gray-500 hover:text-blue-500 p-2">
-                            <FaBell size={24} />
-                        </button>
-                        
+                            <button className="text-gray-500 hover:text-blue-500 p-2">
+                                <FaBell size={24} />
+                            </button>
+
                         </Link>
                         <Link to="/settings">
                             <button className="text-gray-500 hover:text-blue-500 p-2">
