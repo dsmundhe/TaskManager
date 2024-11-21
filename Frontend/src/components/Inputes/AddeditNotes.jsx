@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddeditNotes = ({ hideHandle, setopenaddIsShown }) => {
+const AddeditNotes = ({ setopenaddIsShown }) => {
     const handleClose = () => {
         setopenaddIsShown({
             isShown: false,

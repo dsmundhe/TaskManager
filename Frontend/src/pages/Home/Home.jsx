@@ -71,7 +71,7 @@ const Home = () => {
           },
         }}
         contentLabel=""
-        className="w-[60%] max-h-3/4 bg-white mx-auto mt-20 "
+        className="w-[80%] max-h-3/4 bg-white mx-auto mt-20 rounded"
       >
         <AddeditNotes
           setopenaddIsShown={setopenaddIsShown}
