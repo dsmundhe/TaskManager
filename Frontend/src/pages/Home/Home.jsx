@@ -5,7 +5,7 @@ import './Home.css'
 import { FaPlus } from "react-icons/fa";
 import AddeditNotes from '../../components/Inputes/AddeditNotes';
 import Modal from 'react-modal'
-
+import SearchBar from '../../components/SearchBar/SearchBar'
 
 const Home = () => {
 
@@ -16,7 +16,10 @@ const Home = () => {
   })
   return (
     <>
-      <Navbar />
+      <Navbar /> 
+      <SearchBar/>
+
+
       <div className="container mt-8 px-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <Notecard
