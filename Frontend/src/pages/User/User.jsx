@@ -90,30 +90,12 @@ const User = () => {
                                 </button>
                             </div>
                         </div>
-<<<<<<< HEAD
                         {/* Logout Message */}
                         {logoutMessage && (
                             <div className="mt-4 text-center text-green-700 bg-green-100 py-2 rounded">
                                 {logoutMessage}
                             </div>
                         )}
-=======
-                    )}
-
-                    {/* Notification Bell and Settings Icon */}
-                    <div className="flex justify-center mt-6 space-x-4">
-                        <Link to="/notifications">
-                            <button className="text-gray-500 hover:text-blue-500 p-2">
-                                <FaBell size={24} />
-                            </button>
-
-                        </Link>
-                        <Link to="/settings">
-                            <button className="text-gray-500 hover:text-blue-500 p-2">
-                                <FaCog size={24} />
-                            </button>
-                        </Link>
->>>>>>> 8924e0ae16f6fa031b9bdfccd7230324c30453ba
                     </div>
 
                     {/* Activity Section */}
