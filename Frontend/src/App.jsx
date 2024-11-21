@@ -3,6 +3,7 @@ import Home from "./pages/Home/Home"
 import Login from './pages/Login/Login'
 import Signup from './pages/SignUp/SignUp'
 import User from './pages/User/User'
+import LandingPage from "./pages/LandingPage/LandingPage";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 const App = () => {
@@ -10,7 +11,10 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />}></Route>
+          {/* landing page route */}
+        <Route path="/" element={<LandingPage />}></Route> 
+
+          <Route path='/home' element={<Home />}></Route>
           <Route path='login' element={<Login />}></Route>
           <Route path='/signup' element={<Signup />}></Route>
           <Route path='/profile' element={<User />}></Route>
