@@ -16,7 +16,7 @@ body {
     align-items: center;
     padding: 0;
     margin: 0;
-    /* background-image: url('path/to/your/image.jpg');
+    /* background-image: url('./assets/homebe.jpg');
     background-size: cover; 
     background-position: center;
     background-repeat: no-repeat;  */
@@ -208,9 +208,9 @@ body {
       border-color: transparent;
     }
     50% {
-      border-color: #0091ff41;
+      border-color: #f2f3f441;
       
     }
+    
   }
-
-  
+ 
