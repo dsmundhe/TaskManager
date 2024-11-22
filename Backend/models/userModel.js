@@ -13,7 +13,14 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    notes: [
+        {
+            title: { type: String },
+            content: { type: String }
+        }
+    ]
+
 }, { timestamps: true })
 
 //user model

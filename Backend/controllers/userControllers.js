@@ -16,8 +16,14 @@ const handleSignup = async (req, res) => {
             return res.status(409).json({ msg: "User already exists!", result: false });
         }
 
+        const notes = [{
+            title: "Not added any task here!",
+            content: "-",
+            id: Date.now(),
+        }]
+
         // Create the user
-        const user = await userModel.create({ name, email, password });
+        const user = await userModel.create({ name, email, password, notes });
 
         // Generate token
         const token = genToken(user._id);
@@ -25,7 +31,7 @@ const handleSignup = async (req, res) => {
         return res.status(201).json({
             msg: "User created successfully!",
             generatedToken: token,
-            user: { id: user._id, name: user.name, email: user.email },
+            user: { id: user._id, name: user.name, email: user.email, notes: user.notes },
             result: true
         });
     } catch (error) {
@@ -53,4 +59,47 @@ const handleLogin = async (req, res) => {
 
 }
 
-module.exports = { handleSignup, handleLogin };
+
+// getNotes
+const getNotes = async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.json({ result: false, msg: "Provide user email" })
+    }
+
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+        return res.json({ result: false, msg: "Unauthorized user!" })
+    }
+    return res.json(user.notes);
+}
+
+const addNotes = async (req, res) => {
+    const { email, title, content } = req.body;
+    if (!email) {
+        return res.json({ result: false, msg: "Provide email!" })
+    }
+
+    if (!title || !content) {
+        return res.json({ result: false, msg: "Provide notes information" })
+    }
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.json({ result: false, msg: "user not found" })
+    }
+
+
+    const note = {
+        title: title,
+        content: content,
+        id: user.notes.length > 0 ? user.notes.length + 1 : 1
+    }
+    await user.notes.push(note);
+    await user.save();
+
+    return res.json({ msg: 'note added successfuly', result: true })
+}
+
+module.exports = { handleSignup, handleLogin, getNotes, addNotes };
