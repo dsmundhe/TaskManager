@@ -27,9 +27,9 @@ const LandingPage = () => {
 
       <header className="hero">
         <h2 className="typing-effect">
-          <span className="line-1">Your Success Starts Here</span>
+          <span className="line-1"> Unlock your potential </span>
           <br />
-          <span className="line-2">the <span>Heart Of Every Organization</span> </span>
+          <span className="line-2">turn <span>  tasks into triumphs and achieve more!</span> </span>
         </h2>
 
         <p>

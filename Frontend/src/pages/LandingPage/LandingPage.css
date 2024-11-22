@@ -1,9 +1,9 @@
-/* General Reset */
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #bfd0e1, #a9e5e79b);
-    color: #333; /* Neutral text color for readability */
+   
+    color: #333; 
   }
   
   /* Landing Page Container */
@@ -16,6 +16,10 @@ body {
     align-items: center;
     padding: 0;
     margin: 0;
+    /* background-image: url('path/to/your/image.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;  */
   }
   
   /* Navbar Styling */
@@ -39,7 +43,7 @@ body {
   }
   
   .logo span {
-    color: #476ae0; /* Highlighted part of the logo */
+    color: #476ae0; 
   }
   
   .nav-links {
@@ -57,7 +61,7 @@ body {
   }
   
   .nav-links a:hover {
-    color: #ff7a00; /* Hover effect for navigation links */
+    color: #ff7a00;
   }
   
   .login-btn {
@@ -72,7 +76,7 @@ body {
   }
   
   .login-btn:hover {
-    background: #87bedc; /* Slightly darker orange on hover */
+    background: #87bedc; 
   }
   
   /* Hero Section */
@@ -116,7 +120,7 @@ body {
     display: inline-block;
     width: 0;
     animation: typing-line2 4s steps(25, end) forwards;
-    opacity: 0; /* Initially hide the second line */
+    opacity: 0; 
     animation-delay: 3s; 
     white-space: nowrap;
     color: blue;
@@ -135,7 +139,7 @@ body {
     margin-right: auto;
   }
   
-  /* Call-to-Action (CTA) Section */
+  
   .cta {
     margin-top: 2rem;
     display: flex;
@@ -154,7 +158,7 @@ body {
   
   .cta input:focus {
     outline: none;
-    box-shadow: 0 0 5px #ff7a00; /* Highlighted border on focus */
+    box-shadow: 0 0 5px #ff7a00; 
   }
   
   .cta-btn {
@@ -183,10 +187,10 @@ body {
   }
   @keyframes typing-line1 {
     from {
-      width: 0; /* Start with no text visible */
+      width: 0; 
     }
     to {
-      width: 100%; /* Full second line text visible */
+      width: 100%; 
     }
   }
   @keyframes typing-line2 {
