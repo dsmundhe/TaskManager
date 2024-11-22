@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import AddeditNotes from '../../components/Inputes/AddeditNotes';
 import Modal from 'react-modal'
 import SearchBar from '../../components/SearchBar/SearchBar'
+import Login from '../../pages/Login/Login'
 
 const Home = () => {
 
@@ -16,8 +17,8 @@ const Home = () => {
   })
   return (
     <>
-      <Navbar /> 
-      <SearchBar/>
+      <Navbar />
+      <SearchBar />
 
 
       <div className="container mt-8 px-2">
@@ -79,6 +80,7 @@ const Home = () => {
         <AddeditNotes
           setopenaddIsShown={setopenaddIsShown}
         />
+
 
       </Modal>
 
