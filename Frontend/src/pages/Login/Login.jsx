@@ -11,11 +11,15 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Modal from 'react-modal'
+
 const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
+
+
 
     const navigate = useNavigate();
 
@@ -75,6 +79,9 @@ const Login = () => {
 
         // for to reach home page after login
         navigate('/');
+
+
+
     };
 
 
@@ -134,7 +141,12 @@ const Login = () => {
                                 />
                             </div>
                         </div>
+
+
                         <ToastContainer />
+
+
+
                         <p className='text-xs text-red-600'>
                             {error}
                         </p>
