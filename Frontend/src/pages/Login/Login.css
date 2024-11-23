@@ -2,8 +2,12 @@
   font-size: 14px;
   padding: 10px 20px;
   border-radius: 8px;
-  margin-top: 80px;
+  margin-top: 10px;
   max-width: 400px; /* Set a reasonable max width for large screens */
+}
+
+.toastContainer {
+  margin-top: 50px;
 }
 
 @media (max-width: 768px) {
@@ -11,7 +15,7 @@
     font-size: 13px; /* Slightly larger font for better readability on tablets */
     padding: 8px 16px;
     max-width: 90%; /* Occupy most of the screen width */
-    margin: 150px auto; /* Center the toast */
+    margin: 10px auto; /* Center the toast */
   }
 }
 
@@ -19,7 +23,11 @@
   .custom-toast {
     font-size: 12px;
     padding: 6px 12px;
-    max-width: 95%; /* Almost full width for smaller devices */
-    margin: 100px auto; /* Keep it centered */
+    max-width: 85%; /* Almost full width for smaller devices */
+    /* Keep it centered */
+  }
+
+  .toastContainer {
+    margin-top: 100px;
   }
 }
