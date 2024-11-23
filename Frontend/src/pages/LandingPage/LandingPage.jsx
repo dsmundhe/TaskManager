@@ -10,20 +10,22 @@ const LandingPage = () => {
       navigate('/login'); 
     };
 
+    // Function to navigate to the signup page
+    const handleSignupClick = () => {
+      navigate('/signup'); 
+    };
+
   return (
     <div className="landing-page">
-      <nav className="navbar">
-        <h1 className="logo">Plan<span>It</span></h1>
-        <ul className="nav-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#support">Support</a></li>
-          <li><a href="#blog">Blog</a></li>
-        </ul>
-        
-        {/* Add onClick to the Login button */}
-        <button className="login-btn" onClick={handleLoginClick}>Log In</button>
-      </nav>
+       <div className="logo-container">
+    <h1 className="logo">
+      Plan<span>It</span>
+    </h1>
+  </div>
+      <div className="auth-buttons">
+        <button className="auth-btn" onClick={handleLoginClick}>Log In</button>
+        <button className="auth-btn" onClick={handleSignupClick}>Sign Up</button>
+      </div>
 
       <header className="hero">
         <h2 className="typing-effect">
@@ -33,7 +35,7 @@ const LandingPage = () => {
         </h2>
 
         <p>
-        Every great achievement begins with a single step. Take yours
+          Every great achievement begins with a single step. Take yours
           <strong> Today!</strong>
         </p>
         <div className="cta">
