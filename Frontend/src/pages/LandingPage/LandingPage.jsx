@@ -11,11 +11,14 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      {/* Header Section */}
-      <div className="logo-container">
-        <h1 className="logo">
-          Plan<span>It</span>
-        </h1>
+       <div className="logo-container">
+    <h1 className="logo">
+      Plan<span>It</span>
+    </h1>
+  </div>
+      <div className="auth-buttons">
+        <button className="auth-btn" onClick={handleLoginClick}>Log In</button>
+        <button className="auth-btn" onClick={handleSignupClick}>Sign Up</button>
       </div>
 
       {/* Hero Section */}
