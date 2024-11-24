@@ -22,6 +22,7 @@ const LandingPage = () => {
       Plan<span>It</span>
     </h1>
   </div>
+  
       <div className="auth-buttons">
         <button className="auth-btn" onClick={handleLoginClick}>Log In</button>
         <button className="auth-btn" onClick={handleSignupClick}>Sign Up</button>
