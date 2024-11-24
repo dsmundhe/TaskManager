@@ -78,7 +78,7 @@ const Login = () => {
         });
 
         // for to reach home page after login
-        navigate('/');
+        navigate('/home');
 
 
 

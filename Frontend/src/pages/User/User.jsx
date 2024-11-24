@@ -76,7 +76,7 @@ const User = () => {
                   Update Profile
                 </button>
                 <div className="mt-4">
-                  <Link to="/">
+                  <Link to="/home">
                     <button className="w-full py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all duration-300 ease-in-out">
                       Go to Home
                     </button>

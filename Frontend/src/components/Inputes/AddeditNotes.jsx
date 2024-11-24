@@ -32,7 +32,8 @@ const AddeditNotes = ({ setopenaddIsShown }) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30">
-            <div className="w-[400px] p-4 bg-white rounded-lg shadow-lg relative">
+            {/* Responsive Modal Container */}
+            <div className="w-full max-w-lg sm:max-w-md p-4 bg-white rounded-lg shadow-lg relative">
                 {/* Close Button */}
                 <button
                     className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
@@ -48,7 +49,6 @@ const AddeditNotes = ({ setopenaddIsShown }) => {
                 <div className="mt-2">
                     <input
                         type="text"
-                       
                         placeholder="Enter title"
                         className="w-full text-lg font-semibold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-purple-500"
                     />
@@ -66,7 +66,7 @@ const AddeditNotes = ({ setopenaddIsShown }) => {
                 {/* Tags */}
                 <div className="mt-4">
                     <p className="text-xs text-gray-500 mb-1">TAGS</p>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                         <input
                             type="text"
                             placeholder="Add tags"
