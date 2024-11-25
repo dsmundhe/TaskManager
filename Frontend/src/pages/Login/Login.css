@@ -1,8 +1,12 @@
+body {
+  background-color: #cff0f2ab;
+}
 .custom-toast {
   font-size: 14px;
   padding: 10px 20px;
   border-radius: 8px;
   margin-top: 10px;
+  
   max-width: 400px; /* Set a reasonable max width for large screens */
 }
 

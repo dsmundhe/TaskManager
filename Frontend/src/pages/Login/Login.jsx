@@ -93,7 +93,7 @@ const Login = () => {
 
             {/* Login Form Container */}
             <div className="flex items-center justify-center mt-28 bg-dark-100">
-                <div className="w-96 border rounded px-7 py-10 bg-white shadow-lg  ">
+                <div className="w-96 border rounded px-7 py-10 bg-white shadow-2xl  ">
 
                     {/* Login Form */}
                     <form className="text-center space-y-6"
@@ -102,19 +102,19 @@ const Login = () => {
 
                         {/* Header Section */}
                         <div>
-                            <h1 className="text-2xl font-semibold">Login</h1>
+                            <h1 className="text-2xl font-semibold ">Login</h1>
                         </div>
 
                         {/* Social Icons Section */}
                         <div className="flex justify-center space-x-4">
                             {/* Replace Icons with actual icons or social login buttons */}
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#08C2FF] hover:text-white transition duration-300  cursor-pointer">
                                 <FaGoogle />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#08C2FF] hover:text-white transition duration-300  cursor-pointer">
                                 <FaLinkedin />
                             </span>
-                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-500 hover:text-white transition duration-300  cursor-pointer">
+                            <span className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#08C2FF] hover:text-white transition duration-300  cursor-pointer">
                                 <FaGithub />
                             </span>
                         </div>
@@ -156,7 +156,7 @@ const Login = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="bg-blue-500 hover:bg-blue-600 text-white px-10 py-2 rounded transition duration-300"
+                                className="bg-[rgb(84,84,219)] hover:bg-[#08C2FF] text-white px-10 py-2 rounded transition duration-300"
                             >
                                 Login
                             </button>
