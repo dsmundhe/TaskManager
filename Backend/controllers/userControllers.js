@@ -1,5 +1,6 @@
 const { genToken } = require('../auth/genToken');
 const { userModel } = require('../models/userModel');
+const mongoose = require('mongoose')
 
 const handleSignup = async (req, res) => {
     const { name, email, password } = req.body;
@@ -19,8 +20,9 @@ const handleSignup = async (req, res) => {
         const notes = [{
             title: "Not added any task here!",
             content: "-",
-            id: Date.now(),
-        }]
+            _id: new mongoose.Types.ObjectId(),
+        }];
+
 
         // Create the user
         const user = await userModel.create({ name, email, password, notes });
@@ -50,7 +52,7 @@ const handleLogin = async (req, res) => {
         }
         console.log(user._id);
         if (user) {
-            res.json({ email, password, msg: 'Login successful', token: genToken(user._id), result: true })
+            res.json({ email, password, msg: 'Login successful', generatedToken: genToken(user._id), result: true })
         }
 
     } catch (error) {
@@ -62,19 +64,21 @@ const handleLogin = async (req, res) => {
 
 // getNotes
 const getNotes = async (req, res) => {
-    const { email } = req.body;
+    const email = req.headers.email; // Get the email from headers
 
     if (!email) {
-        return res.json({ result: false, msg: "Provide user email" })
+        return res.json({ result: false, msg: "Provide user email" });
     }
 
     const user = await userModel.findOne({ email });
 
     if (!user) {
-        return res.json({ result: false, msg: "Unauthorized user!" })
+        return res.json({ result: false, msg: "Unauthorized user!" });
     }
-    return res.json(user.notes);
-}
+
+    return res.json(user.notes); // Return the user's notes
+};
+
 
 const addNotes = async (req, res) => {
     const { email, title, content } = req.body;
@@ -90,7 +94,6 @@ const addNotes = async (req, res) => {
         return res.json({ result: false, msg: "user not found" })
     }
 
-
     const note = {
         title: title,
         content: content,
@@ -102,4 +105,42 @@ const addNotes = async (req, res) => {
     return res.json({ msg: 'note added successfuly', result: true })
 }
 
-module.exports = { handleSignup, handleLogin, getNotes, addNotes };
+const editNote = async (req, res) => {
+    const { email, content, title } = req.body;
+    const { noteID } = req.params;
+
+    if (!email) {
+        return res.json({ msg: 'Provide Email!', result: false })
+    }
+
+    if (!content || !title) {
+        return res.json({ msg: 'Provide content and title', result: false })
+    }
+
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.json({ msg: "invalid Email", result: false })
+    }
+
+    try {
+        let notes = await user.notes;
+
+        const note = await notes.find((val) => val._id.toString() === noteID);
+        if (!note) {
+            return res.json({ msg: "invalid Note ID", result: false })
+        }
+
+        note.title = title;
+        note.content = content;
+        await user.save();
+
+        return res.json({ msg: 'Note edited successfuly!', result: true })
+
+    } catch (error) {
+        return res.json({ msg: "could not edit!", result: false });
+    }
+
+}
+
+
+module.exports = { handleSignup, handleLogin, getNotes, addNotes, editNote };

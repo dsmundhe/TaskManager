@@ -1,77 +1,188 @@
-import React, { useState } from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import Notecard from '../../components/Cards/Notecard';
-import './Home.css'
+import React, { useState, useEffect } from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import Notecard from "../../components/Cards/Notecard";
+import "./Home.css";
 import { FaPlus } from "react-icons/fa";
-import AddeditNotes from '../../components/Inputes/AddeditNotes';
-import Modal from 'react-modal'
-import SearchBar from '../../components/SearchBar/SearchBar'
-import Login from '../../pages/Login/Login'
+import AddeditNotes from "../../components/Inputes/AddeditNotes";
+import Modal from "react-modal";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const Home = () => {
-
   const [openaddisShown, setopenaddIsShown] = useState({
     isShown: false,
-    type: 'add',
-    data: null
-  })
+    type: "add",
+    data: null,
+  });
+
+  const [notes, setNotes] = useState([]); // State to store notes
+  const [error, setError] = useState(null);
+
+  const fetchNotes = async () => {
+    const email = localStorage.getItem("email");
+    const authToken = localStorage.getItem("authToken");
+
+    if (!email || !authToken) {
+      console.error("Missing email or auth token");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/user/getnotes", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+          email: email, // Send email in headers
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch notes");
+      }
+
+      const data = await response.json();
+      setNotes(data);
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotes();
+  }, []); // Empty dependency array to run only once on mount
+
+  const handleAddNote = async (newNote) => {
+    const email = localStorage.getItem("email");
+    const authToken = localStorage.getItem("authToken");
+
+    if (!email || !authToken) {
+      console.error("Missing email or auth token");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/user/addnote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+          email: email,
+        },
+        body: JSON.stringify(newNote),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add note");
+      }
+
+      // Refetch notes after adding
+      fetchNotes();
+      setopenaddIsShown({ isShown: false, type: "", data: null }); // Close modal
+    } catch (error) {
+      console.error("Error adding note:", error);
+    }
+  };
+
+  const handleEditNote = async (updatedNote) => {
+    const email = localStorage.getItem("email");
+    const authToken = localStorage.getItem("authToken");
+
+    if (!email || !authToken) {
+      console.error("Missing email or auth token");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/user/editnote", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+          email: email,
+        },
+        body: JSON.stringify(updatedNote),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to edit note");
+      }
+
+      // Refetch notes after editing
+      fetchNotes();
+      setopenaddIsShown({ isShown: false, type: "", data: null }); // Close modal
+    } catch (error) {
+      console.error("Error editing note:", error);
+    }
+  };
+
+  const handleDeleteNote = async (noteId) => {
+    const email = localStorage.getItem("email");
+    const authToken = localStorage.getItem("authToken");
+
+    if (!email || !authToken) {
+      console.error("Missing email or auth token");
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5000/user/deletenote/${noteId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+          email: email,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete note");
+      }
+
+      // Refetch notes after deleting
+      fetchNotes();
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+  };
+
   return (
     <>
       <Navbar />
       <SearchBar />
 
-
       <div className="container mt-8 px-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Notecard
-            title="Sample Note 1"
-            date="Nov 20, 2024"
-            content="This is a short description of the note."
-            tags={["React", "JavaScript", "CSS"]}
-            isPinned={false}
-            onEdit={() => alert("Edit clicked!")}
-            onDelete={() => alert("Delete clicked!")}
-            onPinnote={() => alert("Pin/Unpin clicked!")}
-          />
-          <Notecard
-            title="Sample Note 2"
-            date="Nov 19, 2024"
-            content="This is another short description of the note."
-            tags={["Node.js", "HTML"]}
-            isPinned={false}
-            onEdit={() => alert("Edit clicked!")}
-            onDelete={() => alert("Delete clicked!")}
-            onPinnote={() => alert("Pin/Unpin clicked!")}
-          />
-          <Notecard
-            title="Sample Note 3"
-            date="Nov 18, 2024"
-            content="Here is yet another description of the note."
-            tags={["API", "MongoDB"]}
-            isPinned={true}
-            onEdit={() => alert("Edit clicked!")}
-            onDelete={() => alert("Delete clicked!")}
-            onPinnote={() => alert("Pin/Unpin clicked!")}
-          />
-          <Notecard
-            title="Sample Note 4"
-            date="Nov 18, 2024"
-            content="Here is yet another description of the note."
-            tags={["Express", "Node.js"]}
-            isPinned={true}
-            onEdit={() => alert("Edit clicked!")}
-            onDelete={() => alert("Delete clicked!")}
-            onPinnote={() => alert("Pin/Unpin clicked!")}
-          />
+          {/* Map over the notes array and display each note */}
+          {notes.length > 0 ? (
+            notes.map((note, index) => (
+              <Notecard
+                key={index}
+                title={note.title}
+                date={note.date}
+                content={note.content}
+                tags={note.tags}
+                isPinned={note.isPinned}
+                onEdit={() => {
+                  setopenaddIsShown({ isShown: true, type: "edit", data: note });
+                }}
+                onDelete={() => handleDeleteNote(note._id)} // Use the note ID for delete
+                onPinnote={() => alert("Pin/Unpin clicked!")}
+              />
+            ))
+          ) : (
+            <div>{error || "No notes available"}</div> // Display error or message when no notes
+          )}
         </div>
       </div>
 
       <Modal
-        isOpen={openaddisShown.isShown} // Use the state variable here
-        onRequestClose={() => setopenaddIsShown({ isShown: false, type: '', data: null })} // Proper close handler
+        isOpen={openaddisShown.isShown}
+        onRequestClose={() =>
+          setopenaddIsShown({ isShown: false, type: "", data: null })
+        }
         style={{
           overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
           },
         }}
         contentLabel=""
@@ -79,20 +190,27 @@ const Home = () => {
       >
         <AddeditNotes
           setopenaddIsShown={setopenaddIsShown}
+          onAddNote={handleAddNote}
+          onEditNote={handleEditNote}
+          noteData={openaddisShown.data} // Pass the data if editing
         />
-
-
       </Modal>
 
-      <div className='editButton'>
-        <button onClick={() => setopenaddIsShown({
-          isShown: true, type: 'add',
-          data: null
-        })}><FaPlus /></button>
+      <div className="editButton">
+        <button
+          onClick={() =>
+            setopenaddIsShown({
+              isShown: true,
+              type: "add",
+              data: null,
+            })
+          }
+        >
+          <FaPlus />
+        </button>
       </div>
     </>
   );
 };
 
 export default Home;
-

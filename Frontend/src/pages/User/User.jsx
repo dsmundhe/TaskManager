@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCog } from "react-icons/fa";
-import Navbar from '../../components/Navbar/Navbar'
+import Navbar from "../../components/Navbar/Navbar";
 
 const User = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const authToken = localStorage.getItem("authToken"); // Retrieves the token
+   const name = localStorage.getItem("name"); // Retrieves the name
+  const email = localStorage.getItem("email"); // Retrieves the email
 
   const user = {
     name: "James William",
@@ -18,6 +22,8 @@ const User = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
     sessionStorage.removeItem("authToken");
     setIsLogoutModalOpen(false);
     setTimeout(() => {
@@ -62,11 +68,9 @@ const User = () => {
                     background: "linear-gradient(45deg, #6a11cb, #2575fc)",
                   }}
                 />
-                <h1 className="text-xl font-bold text-gray-800 mt-4">
-                  {user.name}
-                </h1>
-                <p className="text-sm text-gray-500">{user.email}</p>
-                <p className="text-sm text-gray-500">{user.phone}</p> {/* Added phone number */}
+                <h1 className="text-xl font-bold text-gray-800 mt-4">{name}</h1>
+                <p className="text-sm text-gray-500">{email}</p>
+                {/* Added phone number */}
               </div>
               <div className="mt-6 space-y-4">
                 <button
@@ -84,8 +88,12 @@ const User = () => {
                 </div>
                 <div className="mt-4">
                   <button
-                    onClick={() => setIsLogoutModalOpen(true)}
+                    onClick={async () =>  {
+                      setIsLogoutModalOpen(true);
+                      handleLogout();
+                    }}
                     className="w-full py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-300 ease-in-out"
+                  
                   >
                     Logout
                   </button>
@@ -96,7 +104,9 @@ const User = () => {
             {/* Activity Section */}
             <div className="flex-1 space-y-8">
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-xl font-semibold text-gray-800">Your Activity</h2>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Your Activity
+                </h2>
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <div className="text-center">
                     <p className="text-sm text-gray-600">Total Tasks</p>
@@ -114,18 +124,32 @@ const User = () => {
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-xl font-semibold text-gray-800">Achievements</h2>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Achievements
+                </h2>
                 <div className="flex flex-wrap gap-4 mt-4">
-                  <span className="bg-blue-100 text-blue-700 py-1 px-4 rounded-lg">Task Master</span>
-                  <span className="bg-green-100 text-green-700 py-1 px-4 rounded-lg">Goal Getter</span>
-                  <span className="bg-yellow-100 text-yellow-700 py-1 px-4 rounded-lg">Time Saver</span>
-                  <span className="bg-purple-100 text-purple-700 py-1 px-4 rounded-lg">Innovator</span>
-                  <span className="bg-red-100 text-red-700 py-1 px-4 rounded-lg">Leader</span>
+                  <span className="bg-blue-100 text-blue-700 py-1 px-4 rounded-lg">
+                    Task Master
+                  </span>
+                  <span className="bg-green-100 text-green-700 py-1 px-4 rounded-lg">
+                    Goal Getter
+                  </span>
+                  <span className="bg-yellow-100 text-yellow-700 py-1 px-4 rounded-lg">
+                    Time Saver
+                  </span>
+                  <span className="bg-purple-100 text-purple-700 py-1 px-4 rounded-lg">
+                    Innovator
+                  </span>
+                  <span className="bg-red-100 text-red-700 py-1 px-4 rounded-lg">
+                    Leader
+                  </span>
                 </div>
               </div>
 
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h2 className="text-xl font-semibold text-gray-800">Upcoming Tasks</h2>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  Upcoming Tasks
+                </h2>
                 <ul className="list-disc pl-5 mt-4">
                   <li>Complete "Task 3" - Due on Friday</li>
                   <li>Review "Task 4" - Due on Monday</li>
@@ -221,7 +245,9 @@ const User = () => {
               </h2>
               <form onSubmit={handlePasswordChange} className="mt-4 space-y-4">
                 <div>
-                  <label className="block text-sm text-gray-600">Current Password</label>
+                  <label className="block text-sm text-gray-600">
+                    Current Password
+                  </label>
                   <input
                     type="password"
                     className="w-full p-2 border border-gray-300 rounded-md"
@@ -229,7 +255,9 @@ const User = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-600">New Password</label>
+                  <label className="block text-sm text-gray-600">
+                    New Password
+                  </label>
                   <input
                     type="password"
                     className="w-full p-2 border border-gray-300 rounded-md"
@@ -237,7 +265,9 @@ const User = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-600">Confirm Password</label>
+                  <label className="block text-sm text-gray-600">
+                    Confirm Password
+                  </label>
                   <input
                     type="password"
                     className="w-full p-2 border border-gray-300 rounded-md"
