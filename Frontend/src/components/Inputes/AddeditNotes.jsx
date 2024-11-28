@@ -31,7 +31,7 @@ const AddeditNotes = ({ setopenaddIsShown }) => {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 p-4">
             {/* Responsive Modal Container */}
             <div className="w-full max-w-lg sm:max-w-md p-4 bg-white rounded-lg shadow-lg relative">
                 {/* Close Button */}
