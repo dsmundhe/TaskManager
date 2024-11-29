@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
     notes: [
         {
             title: { type: String },
-            content: { type: String }
+            content: { type: String },
+            isPin: { type: Boolean }
         }
     ]
 

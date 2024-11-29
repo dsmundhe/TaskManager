@@ -2,6 +2,9 @@ const { genToken } = require('../auth/genToken');
 const { userModel } = require('../models/userModel');
 const mongoose = require('mongoose')
 
+
+
+
 const handleSignup = async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -42,6 +45,9 @@ const handleSignup = async (req, res) => {
     }
 };
 
+
+
+
 const handleLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -50,9 +56,11 @@ const handleLogin = async (req, res) => {
         if (!user) {
             return res.json({ msg: 'Check Email & Password', result: false })
         }
-        console.log(user._id);
+
+        // console.log(user._id);
+
         if (user) {
-            res.json({ email, password, msg: 'Login successful', generatedToken: genToken(user._id), result: true })
+            res.json({ email, password, msg: 'Login successful', generatedToken: genToken(user._id), result: true, user: user })
         }
 
     } catch (error) {
@@ -60,6 +68,8 @@ const handleLogin = async (req, res) => {
     }
 
 }
+
+
 
 
 // getNotes
@@ -73,15 +83,19 @@ const getNotes = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-        return res.json({ result: false, msg: "Unauthorized user!" });
+        return res.json({ result: false, msg: "sign up first!" });
     }
 
     return res.json(user.notes); // Return the user's notes
 };
 
 
+
+
+
 const addNotes = async (req, res) => {
-    const { email, title, content } = req.body;
+    const { title, content, isPin } = req.body;
+    const email = req.headers.email
     if (!email) {
         return res.json({ result: false, msg: "Provide email!" })
     }
@@ -97,6 +111,7 @@ const addNotes = async (req, res) => {
     const note = {
         title: title,
         content: content,
+        isPin: isPin,
         id: user.notes.length > 0 ? user.notes.length + 1 : 1
     }
     await user.notes.push(note);
@@ -105,10 +120,14 @@ const addNotes = async (req, res) => {
     return res.json({ msg: 'note added successfuly', result: true })
 }
 
-const editNote = async (req, res) => {
-    const { email, content, title } = req.body;
-    const { noteID } = req.params;
 
+
+
+
+const editNote = async (req, res) => {
+    const { content, title } = req.body;
+    const { noteID } = req.params;
+    const email = req.headers.email;
     if (!email) {
         return res.json({ msg: 'Provide Email!', result: false })
     }
@@ -143,4 +162,76 @@ const editNote = async (req, res) => {
 }
 
 
-module.exports = { handleSignup, handleLogin, getNotes, addNotes, editNote };
+
+const deleteNote = async (req, res) => {
+    const email = req.headers.email;
+    const { noteID } = req.params;
+    if (!email) {
+        return res.json({ msg: 'Provide email', result: false })
+    }
+
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.json({ msg: 'Invalid email!', result: false })
+    }
+
+    let allNotes = await user.notes;
+    try {
+        allNotes = await allNotes.filter((val) => val._id.toString() !== noteID);
+        user.notes = allNotes;
+        await user.save();
+        return res.json({ msg: "Deleted successfuly", result: true })
+    } catch (error) {
+        return res.json({ msg: 'could not delete note', result: false })
+    }
+}
+
+
+
+const pinNote = async (req, res) => {
+    const email = req.headers.email;
+    const { noteID } = req.params;
+  
+    if (!email) {
+      return res.json({ msg: 'Provide Email', result: false });
+    }
+  
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.json({ msg: 'Invalid Email', result: false });
+    }
+  
+    let note = user.notes.find((val) => val._id.toString() === noteID);
+  
+    if (!note) {
+      return res.json({ msg: 'Note not found', result: false });
+    }
+  
+    note.isPin = true; // Make sure the field name matches your schema
+    await user.save(); // Ensure to wait for the user to be saved
+  
+    return res.json({ msg: 'Note Pinned!', result: true });
+  };
+  
+
+const unpinNote = async (req, res) => {
+    const email = req.headers.email;
+    const { noteID } = req.params;
+    if (!email) {
+        return res.json({ msg: 'Provide Email', result: false })
+    }
+
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.json({ msg: 'Invalid Email', result: false })
+    }
+
+    let note = await user.notes.find((val) => val._id.toString() === noteID);
+    note.isPin = false;
+    user.save();
+    return res.json({ msg: 'Note UnPinned!', result: true })
+}
+
+
+
+module.exports = { handleSignup, handleLogin, getNotes, addNotes, editNote, deleteNote, pinNote, unpinNote };

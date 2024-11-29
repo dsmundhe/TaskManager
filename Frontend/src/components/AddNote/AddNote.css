@@ -1,0 +1,107 @@
+/* AddNote Styles */
+.add-note-container {
+  font-family: "Roboto", sans-serif;
+  background: #f5f7fa;
+  padding: 40px 20px;
+}
+
+.add-note-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.add-note-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+.add-note-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #34495e;
+  margin: 15px 0 5px;
+}
+
+.add-note-input,
+.add-note-textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.add-note-input:focus,
+.add-note-textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+}
+
+.add-note-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.add-note-label-checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #34495e;
+}
+
+.add-note-checkbox {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.add-note-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-note-button:hover {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 8px rgba(52, 152, 219, 0.4);
+}
+
+.add-note-message {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 20px;
+  color: #2c3e50;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

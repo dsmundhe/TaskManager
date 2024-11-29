@@ -6,8 +6,10 @@ import { FaPlus } from "react-icons/fa";
 import AddeditNotes from "../../components/Inputes/AddeditNotes";
 import Modal from "react-modal";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [noteID, setNoteId] = useState();
   const [openaddisShown, setopenaddIsShown] = useState({
     isShown: false,
     type: "add",
@@ -125,14 +127,17 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/user/deletenote/${noteId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-          email: email,
-        },
-      });
+      const response = await fetch(
+        `http://localhost:5000/user/deletenote/${noteId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+            email: email,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to delete note");
@@ -148,7 +153,6 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <SearchBar />
 
       <div className="container mt-8 px-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -161,9 +165,14 @@ const Home = () => {
                 date={note.date}
                 content={note.content}
                 tags={note.tags}
-                isPinned={note.isPinned}
+                isPinned={note.isPin}
+                noteID={note._id}
                 onEdit={() => {
-                  setopenaddIsShown({ isShown: true, type: "edit", data: note });
+                  setopenaddIsShown({
+                    isShown: true,
+                    type: "edit",
+                    data: note,
+                  });
                 }}
                 onDelete={() => handleDeleteNote(note._id)} // Use the note ID for delete
                 onPinnote={() => alert("Pin/Unpin clicked!")}
@@ -186,28 +195,25 @@ const Home = () => {
           },
         }}
         contentLabel=""
-        className="w-[80%] max-h-3/4 bg-white mx-auto mt-20 rounded"
+        className="w-[75%] max-h-3/4 bg-white mx-auto mt-20 rounded"
       >
         <AddeditNotes
           setopenaddIsShown={setopenaddIsShown}
           onAddNote={handleAddNote}
           onEditNote={handleEditNote}
-          noteData={openaddisShown.data} // Pass the data if editing
+          noteData={{
+            ...openaddisShown.data, // Include existing note data
+            noteId: openaddisShown.data?._id || noteID, // Use existing noteId or noteID state
+          }}
         />
       </Modal>
 
       <div className="editButton">
-        <button
-          onClick={() =>
-            setopenaddIsShown({
-              isShown: true,
-              type: "add",
-              data: null,
-            })
-          }
-        >
-          <FaPlus />
-        </button>
+        <Link to="/addnote">
+          <button>
+            <FaPlus />
+          </button>
+        </Link>
       </div>
     </>
   );

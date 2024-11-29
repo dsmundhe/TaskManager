@@ -1,34 +1,25 @@
 import React from "react";
 import { getInitials } from "../utils/helper";
 
-const ProfileInfo = ({ onLogout }) => {
+const ProfileInfo = () => {
   const name = localStorage.getItem("name");
   return (
-    <div className=" flex items-centre gap-3">
+    <div className="flex items-center gap-4   rounded-lg   hover:shadow-lg transition-shadow duration-300">
       {name ? (
         <>
-          <div
-            className="w-12 h-12  flex items-center justify-center rounded-full text-slate-950 font-medium bg-slate-200
-      
-       "
-          >
-            <h2 className="text-black font-semibold"> {getInitials(name)}</h2>
+          {/* User Avatar with Initials */}
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold text-lg">
+            <h2>{getInitials(name)}</h2>
           </div>
 
-          <div>
-            <p className=" text-sm font-medium"> {name}</p>
-            <button
-              className="text-sm text-slate-70 underline"
-              onClick={onLogout}
-            >
-              Logout
-            </button>
+          {/* User Information */}
+          <div className="flex flex-col justify-center">
+            <p className="text-base font-semibold text-gray-800">{name}</p>
           </div>
         </>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </div>
   );
 };
+
 export default ProfileInfo;

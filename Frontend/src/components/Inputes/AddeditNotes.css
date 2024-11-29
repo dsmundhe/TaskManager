@@ -1,0 +1,109 @@
+.add-edit-notes-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+     margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .add-edit-notes-header {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .add-edit-notes-error,
+  .add-edit-notes-success {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  
+  .add-edit-notes-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .add-edit-notes-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .add-edit-notes-input-group {
+    margin-bottom: 15px;
+  }
+  
+  .add-edit-notes-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .add-edit-notes-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .add-edit-notes-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .add-edit-notes-pinned {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-edit-notes-checkbox {
+    margin-right: 10px;
+  }
+  
+  .add-edit-notes-checkbox-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .add-edit-notes-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .add-edit-notes-save-button,
+  .add-edit-notes-cancel-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-edit-notes-save-button {
+    background-color: #007bff;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .add-edit-notes-save-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .add-edit-notes-cancel-button {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .add-edit-notes-cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+  
