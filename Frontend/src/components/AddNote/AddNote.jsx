@@ -28,7 +28,7 @@ const AddNote = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/user/addnotes",
+        "https://taskmanager-backend-nkb7.onrender.com/user/addnotes",
         formData,
         {
           headers: {

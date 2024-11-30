@@ -32,7 +32,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/user/getnotes", {
+      const response = await fetch("https://taskmanager-backend-nkb7.onrender.com/user/getnotes", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/user/addnote", {
+      const response = await fetch("https://taskmanager-backend-nkb7.onrender.com/user/addnote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/user/editnote", {
+      const response = await fetch("https://taskmanager-backend-nkb7.onrender.com/user/editnote", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +131,7 @@ const Home = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/user/deletenote/${noteId}`,
+        `https://taskmanager-backend-nkb7.onrender.com/user/deletenote/${noteId}`,
         {
           method: "DELETE",
           headers: {

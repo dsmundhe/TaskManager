@@ -19,10 +19,9 @@ const SignUp = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+
     // Validation
     if (!name || !email || !password) {
-      setIsLoading(false);
       toast.error("Please fill in all fields", {
         position: "top-right",
         autoClose: 5000,
@@ -34,16 +33,17 @@ const SignUp = () => {
       });
       return;
     }
-
+    setIsLoading(true);
     try {
-      setIsLoading(false);
-      const response = await axios.post("http://localhost:5000/user/signup", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://taskmanager-backend-nkb7.onrender.com/user/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
-      console.log(response.data);
       // On successful signup/login
       const { generatedToken, user } = response.data;
 
@@ -70,7 +70,6 @@ const SignUp = () => {
         setPassword("");
         navigate("/home");
       } else {
-        setIsLoading(false);
         toast.error(response.data.msg || "Signup failed!", {
           position: "top-right",
           autoClose: 5000,
@@ -82,7 +81,6 @@ const SignUp = () => {
         });
       }
     } catch (error) {
-      setIsLoading(false);
       console.error("Error during signup:", error);
       toast.error("Try another Email ID!", {
         position: "top-right",
@@ -93,6 +91,8 @@ const SignUp = () => {
         draggable: true,
         className: "custom-toast",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 

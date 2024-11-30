@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    setIsLoading(true);
+    
     e.preventDefault();
 
     // Clear previous error
@@ -32,7 +32,7 @@ const Login = () => {
 
     // Validation checks
     if (!email || !password || !name) {
-      setIsLoading(false);
+      
       toast.error("Please fill all the fields", {
         position: "top-right",
         autoClose: 5000,
@@ -46,7 +46,7 @@ const Login = () => {
     }
 
     if (!validateEmail(email)) {
-      setIsLoading(false);
+      
       toast.error("Please enter a valid email", {
         position: "top-right",
         autoClose: 5000,
@@ -58,10 +58,11 @@ const Login = () => {
       });
       return;
     }
+     setIsLoading(true);
 
     try {
-      setIsLoading(false);
-      const response = await axios.post("http://localhost:5000/user/login", {
+      
+      const response = await axios.post("https://taskmanager-backend-nkb7.onrender.com/user/login", {
         email,
         password,
       });
@@ -94,7 +95,7 @@ const Login = () => {
         // Redirect to home page
         navigate("/home");
       } else {
-        setIsLoading(false);
+        
         toast.error("Invalid email or password", {
           position: "top-right",
           autoClose: 5000,
@@ -106,7 +107,7 @@ const Login = () => {
         });
       }
     } catch (error) {
-      setIsLoading(false);
+    
       toast.error("Error during login. Please try again", {
         position: "top-right",
         autoClose: 5000,
@@ -116,6 +117,8 @@ const Login = () => {
         draggable: true,
         className: "custom-toast",
       });
+    }finally{
+      setIsLoading(false)
     }
   };
 

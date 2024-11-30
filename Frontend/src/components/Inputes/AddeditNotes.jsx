@@ -58,7 +58,7 @@ const AddeditNotes = ({
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/user/editnote/${noteID}`,
+        `https://taskmanager-backend-nkb7.onrender.com/user/editnote/${noteID}`,
         {
           title: note.title,
           content: note.content,
@@ -73,7 +73,7 @@ const AddeditNotes = ({
       );
 
       if (response.data.result) {
-        await  fetchNotes();
+        await fetchNotes();
         setMessage("Note edited successfully!");
         onEditNote({
           ...note,

@@ -22,7 +22,7 @@ const NoteCard = ({
     const email = localStorage.getItem("email");
 
     const response = await axios.put(
-      `http://localhost:5000/user/pinnote/${noteID}`,
+      `https://taskmanager-backend-nkb7.onrender.com/user/pinnote/${noteID}`,
       {},
       {
         headers: {
