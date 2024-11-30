@@ -9,6 +9,7 @@ const AddeditNotes = ({
   onEditNote,
   noteData,
   email,
+  fetchNotes,
 }) => {
   const [title, setTitle] = useState(noteData?.title || "");
   const [content, setContent] = useState(noteData?.content || "");
@@ -28,6 +29,7 @@ const AddeditNotes = ({
   }, [noteData]);
 
   const handleSave = async () => {
+    fetchNotes();
     if (!title.trim() || !content.trim()) {
       setError("Title and Content are required!");
       return;
@@ -71,6 +73,7 @@ const AddeditNotes = ({
       );
 
       if (response.data.result) {
+        await  fetchNotes();
         setMessage("Note edited successfully!");
         onEditNote({
           ...note,
@@ -141,10 +144,7 @@ const AddeditNotes = ({
       </div>
 
       <div className="add-edit-notes-buttons">
-        <button
-          onClick={handleSave}
-          className="add-edit-notes-save-button"
-        >
+        <button onClick={handleSave} className="add-edit-notes-save-button">
           Save
         </button>
         <button

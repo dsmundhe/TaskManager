@@ -5,22 +5,24 @@ import { Link } from "react-router-dom";
 import { FaGoogle, FaLinkedin, FaGithub } from "react-icons/fa"; // Combined import for icons
 import PasswordIn from "../../components/PasswordIn/PasswordIn"; // Assuming PasswordIn is a custom component
 import { useNavigate } from "react-router-dom";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/Loader/Loader";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [isLodaing, setIsLoading] = useState(false);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     // Validation
     if (!name || !email || !password) {
+      setIsLoading(false);
       toast.error("Please fill in all fields", {
         position: "top-right",
         autoClose: 5000,
@@ -34,6 +36,7 @@ const SignUp = () => {
     }
 
     try {
+      setIsLoading(false);
       const response = await axios.post("http://localhost:5000/user/signup", {
         name,
         email,
@@ -67,6 +70,7 @@ const SignUp = () => {
         setPassword("");
         navigate("/home");
       } else {
+        setIsLoading(false);
         toast.error(response.data.msg || "Signup failed!", {
           position: "top-right",
           autoClose: 5000,
@@ -78,6 +82,7 @@ const SignUp = () => {
         });
       }
     } catch (error) {
+      setIsLoading(false);
       console.error("Error during signup:", error);
       toast.error("Try another Email ID!", {
         position: "top-right",
@@ -151,12 +156,21 @@ const SignUp = () => {
 
             {/* Signup Button */}
             <div>
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-600 text-white px-10 py-2 rounded transition duration-300"
-              >
-                Sign Up
-              </button>
+              {isLodaing ? (
+                <>
+                  <Loader />
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-10 py-2 rounded transition duration-300"
+                  >
+                    Sign Up
+                  </button>
+                </>
+              )}
             </div>
 
             {/* Redirect to Login */}

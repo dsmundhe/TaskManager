@@ -1,0 +1,40 @@
+.loader-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bar-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.bar-loader div {
+  width: 8px;
+  height: 30px;
+  background: linear-gradient(135deg, #4a90e2, #50c878);
+  animation: grow 1s infinite;
+}
+
+.bar-loader div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.bar-loader div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.bar-loader div:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes grow {
+  0%, 100% {
+    height: 10px;
+  }
+  50% {
+    height: 30px;
+  }
+}

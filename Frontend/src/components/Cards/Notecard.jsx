@@ -2,6 +2,7 @@ import React from "react";
 import { MdOutlinePushPin } from "react-icons/md";
 import { MdCreate, MdDelete } from "react-icons/md";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NoteCard = ({
   title,
@@ -13,7 +14,9 @@ const NoteCard = ({
   onDelete,
   onPinNote,
   noteID,
+  fetchNotes,
 }) => {
+  const navigate = useNavigate();
   const handlePin = async () => {
     const authToken = localStorage.getItem("authToken");
     const email = localStorage.getItem("email");
@@ -31,37 +34,36 @@ const NoteCard = ({
     );
 
     if (response.data.result) {
-      alert("Note pinned successfully!");
+      await fetchNotes();
     } else {
       alert("Could not pin the note.");
     }
   };
 
   return (
-    <div className="border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out">
-      <div className="flex item-centre justify-between">
+    <div className="border rounded-lg p-6 bg-gradient-to-r from-white to-gray-100 shadow-md hover:shadow-lg transition-all ease-in-out">
+      <div className="flex items-center justify-between mb-3">
         <div>
-          <h6 className="text-sm font-medium">{title}</h6>
-          <span className="text-xs text-slate-500">{date}</span>
+          <h6 className="text-lg font-semibold text-zinc-950">{title}</h6>
+          <span className="text-xs text-gray-500">{date}</span>
         </div>
-
         <MdOutlinePushPin
-          className={`icon-btn ${isPinned ? "text-primary" : "text-slate-300"}`}
+          className={`icon-btn text-2xl cursor-pointer transition-colors ${
+            isPinned ? "text-yellow-500" : "text-gray-400"
+          } hover:text-yellow-600`}
           onClick={() => handlePin()}
         />
       </div>
-      <p className="text-xs text-slate-600 mt-2">{content?.slice(0, 60)}</p>
-
-      <div className="text items-centre justify-between mt-2">
-        <div className="text-xs text-slate-500">{tags}</div>
-
-        <div className="flex items-cnter gap-2">
+      <p className="text-sm text-gray-700 mb-3 line-clamp-2">{content}</p>
+      <div className="flex items-center justify-between">
+        <div className="text-xs text-gray-600 italic">{tags}</div>
+        <div className="flex items-center gap-4">
           <MdCreate
-            className="icon-btn hover:text-green-600"
+            className="icon-btn text-xl cursor-pointer hover:text-green-500 transition-colors"
             onClick={onEdit}
           />
           <MdDelete
-            className="icon-btn hover:text-red-600"
+            className="icon-btn text-xl cursor-pointer hover:text-red-500 transition-colors"
             onClick={onDelete}
           />
         </div>

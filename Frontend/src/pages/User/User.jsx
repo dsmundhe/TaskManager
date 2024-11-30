@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCog } from "react-icons/fa";
 import Navbar from "../../components/Navbar/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const User = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -10,7 +12,7 @@ const User = () => {
   const navigate = useNavigate();
 
   const authToken = localStorage.getItem("authToken"); // Retrieves the token
-   const name = localStorage.getItem("name"); // Retrieves the name
+  const name = localStorage.getItem("name"); // Retrieves the name
   const email = localStorage.getItem("email"); // Retrieves the email
 
   const user = {
@@ -26,6 +28,15 @@ const User = () => {
     localStorage.removeItem("email");
     sessionStorage.removeItem("authToken");
     setIsLogoutModalOpen(false);
+    toast.success("Logging out Successfuly!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      className: "custom-toast",
+    });
     setTimeout(() => {
       navigate("/login");
     }, 500);
@@ -46,6 +57,8 @@ const User = () => {
 
   return (
     <div>
+      <ToastContainer className="toastContainer" />
+
       <Navbar />
       <div className="bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4 lg:px-0 py-10">
@@ -88,12 +101,11 @@ const User = () => {
                 </div>
                 <div className="mt-4">
                   <button
-                    onClick={async () =>  {
+                    onClick={async () => {
                       setIsLogoutModalOpen(true);
                       handleLogout();
                     }}
                     className="w-full py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-300 ease-in-out"
-                  
                   >
                     Logout
                   </button>

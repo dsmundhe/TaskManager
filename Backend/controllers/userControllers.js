@@ -191,28 +191,33 @@ const deleteNote = async (req, res) => {
 const pinNote = async (req, res) => {
     const email = req.headers.email;
     const { noteID } = req.params;
-  
+
     if (!email) {
-      return res.json({ msg: 'Provide Email', result: false });
+        return res.json({ msg: 'Provide Email', result: false });
     }
-  
+
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.json({ msg: 'Invalid Email', result: false });
+        return res.json({ msg: 'Invalid Email', result: false });
     }
-  
+
     let note = user.notes.find((val) => val._id.toString() === noteID);
-  
+
     if (!note) {
-      return res.json({ msg: 'Note not found', result: false });
+        return res.json({ msg: 'Note not found', result: false });
     }
-  
-    note.isPin = true; // Make sure the field name matches your schema
-    await user.save(); // Ensure to wait for the user to be saved
-  
+
+    if (note.isPin == true) {
+        note.isPin = false;
+    } else {
+        note.isPin = true;
+    }
+
+    await user.save();
+
     return res.json({ msg: 'Note Pinned!', result: true });
-  };
-  
+};
+
 
 const unpinNote = async (req, res) => {
     const email = req.headers.email;

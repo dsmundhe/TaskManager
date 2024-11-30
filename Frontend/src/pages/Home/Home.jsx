@@ -7,6 +7,9 @@ import AddeditNotes from "../../components/Inputes/AddeditNotes";
 import Modal from "react-modal";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/Loader/Loader";
 
 const Home = () => {
   const [noteID, setNoteId] = useState();
@@ -138,7 +141,15 @@ const Home = () => {
           },
         }
       );
-
+      toast.success("Note deleted Successfuly!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        className: "custom-toast",
+      });
       if (!response.ok) {
         throw new Error("Failed to delete note");
       }
@@ -153,6 +164,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
+    
 
       <div className="container mt-8 px-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -176,6 +188,7 @@ const Home = () => {
                 }}
                 onDelete={() => handleDeleteNote(note._id)} // Use the note ID for delete
                 onPinnote={() => alert("Pin/Unpin clicked!")}
+                fetchNotes={fetchNotes}
               />
             ))
           ) : (
@@ -201,13 +214,14 @@ const Home = () => {
           setopenaddIsShown={setopenaddIsShown}
           onAddNote={handleAddNote}
           onEditNote={handleEditNote}
+          fetchNotes={fetchNotes}
           noteData={{
             ...openaddisShown.data, // Include existing note data
             noteId: openaddisShown.data?._id || noteID, // Use existing noteId or noteID state
           }}
         />
       </Modal>
-
+      <ToastContainer className="toastContainer" />
       <div className="editButton">
         <Link to="/addnote">
           <button>

@@ -7,6 +7,7 @@ import axios from "axios";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/Loader/Loader";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [isLodaing, setIsLoading] = useState(false);
 
   // Simple email validation regex
   const validateEmail = (email) => {
@@ -22,6 +24,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     // Clear previous error
@@ -29,6 +32,7 @@ const Login = () => {
 
     // Validation checks
     if (!email || !password || !name) {
+      setIsLoading(false);
       toast.error("Please fill all the fields", {
         position: "top-right",
         autoClose: 5000,
@@ -42,6 +46,7 @@ const Login = () => {
     }
 
     if (!validateEmail(email)) {
+      setIsLoading(false);
       toast.error("Please enter a valid email", {
         position: "top-right",
         autoClose: 5000,
@@ -55,6 +60,7 @@ const Login = () => {
     }
 
     try {
+      setIsLoading(false);
       const response = await axios.post("http://localhost:5000/user/login", {
         email,
         password,
@@ -88,6 +94,7 @@ const Login = () => {
         // Redirect to home page
         navigate("/home");
       } else {
+        setIsLoading(false);
         toast.error("Invalid email or password", {
           position: "top-right",
           autoClose: 5000,
@@ -99,6 +106,7 @@ const Login = () => {
         });
       }
     } catch (error) {
+      setIsLoading(false);
       toast.error("Error during login. Please try again", {
         position: "top-right",
         autoClose: 5000,
@@ -114,6 +122,7 @@ const Login = () => {
   return (
     <>
       <Navbar />
+
       <div className="flex items-center justify-center mt-28 bg-dark-100">
         <div className="w-96 border rounded px-7 py-10 bg-white shadow-2xl">
           <form className="text-center space-y-6" onSubmit={handleSubmit}>
@@ -162,12 +171,21 @@ const Login = () => {
             <p className="text-xs text-red-600">{error}</p>
 
             <div>
-              <button
-                type="submit"
-                className="bg-[rgb(84,84,219)] hover:bg-[#08C2FF] text-white px-10 py-2 rounded transition duration-300"
-              >
-                Login
-              </button>
+              {isLodaing ? (
+                <>
+                  <Loader />
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <button
+                    type="submit"
+                    className="bg-[rgb(84,84,219)] hover:bg-[#08C2FF] text-white px-10 py-2 rounded transition duration-300"
+                  >
+                    Login
+                  </button>
+                </>
+              )}
             </div>
 
             <p className="text-xs mt-3">
