@@ -1,0 +1,19 @@
+.red-loader {
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255, 0, 0, 0.3); /* Light red border */
+    border-top: 2px solid red; /* Solid red top for spinning effect */
+    border-radius: 50%; /* Circular shape */
+    animation: spin 1s linear infinite; /* Spin animation */
+    margin: 0 auto; /* Center within container */
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

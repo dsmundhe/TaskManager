@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AddeditNotes.css";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const AddeditNotes = ({
   setopenaddIsShown,
@@ -18,6 +19,7 @@ const AddeditNotes = ({
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (noteData) {
@@ -55,7 +57,7 @@ const AddeditNotes = ({
   const editNote = async (note, noteID) => {
     const authToken = localStorage.getItem("authToken");
     const email = localStorage.getItem("email");
-
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `https://taskmanager-backend-nkb7.onrender.com/user/editnote/${noteID}`,
@@ -85,6 +87,8 @@ const AddeditNotes = ({
       }
     } catch (error) {
       setError("An error occurred while editing the note.");
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -144,9 +148,17 @@ const AddeditNotes = ({
       </div>
 
       <div className="add-edit-notes-buttons">
-        <button onClick={handleSave} className="add-edit-notes-save-button">
-          Save
-        </button>
+        {isLoading ? (
+          <>
+            <Loader />
+          </>
+        ) : (
+          <>
+            <button onClick={handleSave} className="add-edit-notes-save-button">
+              Save
+            </button>
+          </>
+        )}
         <button
           onClick={() =>
             setopenaddIsShown({ isShown: false, type: "", data: null })

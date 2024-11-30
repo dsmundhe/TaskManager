@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import "./AddNote.css";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 const AddNote = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -10,6 +11,7 @@ const AddNote = () => {
     isPin: false,
   });
 
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -26,6 +28,7 @@ const AddNote = () => {
     const authToken = localStorage.getItem("authToken");
 
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://taskmanager-backend-nkb7.onrender.com/user/addnotes",
@@ -46,6 +49,8 @@ const AddNote = () => {
     } catch (error) {
       setMessage("Error adding note!");
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,9 +90,18 @@ const AddNote = () => {
             />
             Pin this Note
           </label>
-          <button type="submit" className="add-note-button">
-            Add Note
-          </button>
+          {isLoading ? (
+            <>
+              <Loader />
+            </>
+          ) : (
+            <>
+              {" "}
+              <button type="submit" className="add-note-button">
+                Add Note
+              </button>
+            </>
+          )}
         </form>
         {message && <p className="add-note-message">{message}</p>}
       </div>
